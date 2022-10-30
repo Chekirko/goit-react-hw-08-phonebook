@@ -1,22 +1,24 @@
-import ContactForm from '../ContactForm/ContactForm';
-import Filter from '../Filter/Filter';
-import ContactList from '../ContactList/ContactList';
-import { Container, PageTitle, ContactsTitle, LoaderText } from './App.styled';
-import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { refreshUser } from 'redux/operations';
+import { Layout } from 'components/Layout/Layout';
+import { Header } from 'components/Header/Header';
+import { Wrapper } from './App.styled';
 
 const App = function () {
-  const { isLoading } = useSelector(getContacts);
-  return (
-    <Container>
-      <PageTitle>Phonebook</PageTitle>
-      <ContactForm />
-      <ContactsTitle>Contacts</ContactsTitle>
-      <Filter />
-      {isLoading && <LoaderText>Waiting...</LoaderText>}
+  const dispatch = useDispatch();
 
-      <ContactList />
-    </Container>
+  useEffect(() => {
+    dispatch(refreshUser());
+  }, [dispatch]);
+
+  return (
+    <>
+      <Header />
+      <Wrapper>
+        <Layout />
+      </Wrapper>
+    </>
   );
 };
 

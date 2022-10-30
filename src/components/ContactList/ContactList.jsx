@@ -22,8 +22,8 @@ const ContactList = () => {
   );
   return (
     <Contacts>
-      {visibleContacts.map(({ id, name, phone }) => {
-        return <ContactItem key={id} id={id} name={name} number={phone} />;
+      {visibleContacts.map(({ id, name, number }) => {
+        return <ContactItem key={id} id={id} name={name} number={number} />;
       })}
     </Contacts>
   );
@@ -36,7 +36,7 @@ ContactList.propTypes = {
     PropTypes.exact({
       id: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      phone: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
     })
   ),
 };

@@ -43,7 +43,7 @@ const ContactForm = function () {
   const numberInputId = nanoid();
   return (
     <Form action="" onSubmit={handleSubmit}>
-      <FormLabel htmlFor="inputId">Name</FormLabel>
+      <FormLabel htmlFor="nameInputId">Name</FormLabel>
       <FormInput
         type="text"
         name="inputName"
@@ -55,7 +55,7 @@ const ContactForm = function () {
         required
       />
 
-      <FormLabel htmlFor="inputId">Number</FormLabel>
+      <FormLabel htmlFor="numberInputId">Number</FormLabel>
       <FormInput
         type="tel"
         name="inputNumber"
