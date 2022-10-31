@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getContacts, getFilter } from 'redux/selectors';
+import { getContacts, getFilter, getIsLoggedIn } from 'redux/selectors';
 import ContactItem from 'components/ContactItem/ContactItem';
 import { fetchContacts } from 'redux/operations';
 import { Contacts } from './ContactList.styled';
@@ -9,6 +9,7 @@ import { Contacts } from './ContactList.styled';
 const ContactList = () => {
   const contacts = useSelector(getContacts);
   const filter = useSelector(getFilter);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const dispatch = useDispatch();
 
@@ -21,11 +22,15 @@ const ContactList = () => {
     contact.name.toLowerCase().includes(normalizedFilter)
   );
   return (
-    <Contacts>
-      {visibleContacts.map(({ id, name, number }) => {
-        return <ContactItem key={id} id={id} name={name} number={number} />;
-      })}
-    </Contacts>
+    <>
+      {isLoggedIn && (
+        <Contacts>
+          {visibleContacts.map(({ id, name, number }) => {
+            return <ContactItem key={id} id={id} name={name} number={number} />;
+          })}
+        </Contacts>
+      )}
+    </>
   );
 };
 

@@ -25,6 +25,7 @@ export const fetchContacts = createAsyncThunk(
       const contacts = await getContacts();
       return contacts;
     } catch (error) {
+      console.log(error);
       return rejectWithValue(error);
     }
   }
@@ -96,6 +97,7 @@ export const refreshUser = createAsyncThunk(
   'auth/refreshUser',
   async (_, thunkAPI) => {
     const state = thunkAPI.getState();
+    console.log(state);
     const persistedToken = state.auth.token;
 
     if (persistedToken === null) {

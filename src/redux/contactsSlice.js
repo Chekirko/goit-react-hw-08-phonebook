@@ -21,11 +21,10 @@ const contactsSlice = createSlice({
       return { ...state, isLoading: true };
     },
     [fetchContacts.rejected]: (state, { payload }) => {
-      return { ...state, error: payload, isLoading: false };
+      return { ...state, error: payload.name, isLoading: false };
     },
 
     [addContact.fulfilled]: (state, { payload }) => {
-      console.log(payload);
       return {
         ...state,
         items: [...state.items, payload],
