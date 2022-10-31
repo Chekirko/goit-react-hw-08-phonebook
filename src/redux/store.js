@@ -1,14 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { combineReducers } from 'redux';
 import { contactsReducer } from './contactsSlice';
@@ -32,6 +23,14 @@ export const store = configureStore({
 });
 
 export const persistor = persistStore(store);
+console.log('Hello, world');
+
+// FLUSH,
+// REHYDRATE,
+// PAUSE,
+// PERSIST,
+// PURGE,
+// REGISTER,
 
 // {
 //         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
