@@ -1,9 +1,20 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { logIn } from 'redux/operations';
+import {
+  LoginForm,
+  LogWrapper,
+  LogTitle,
+  FormInput,
+  FormLabel,
+  SubmitBtn,
+  ErrorText,
+} from './LoginPage.styled';
+import { getAuthError } from 'redux/selectors';
 
 export const LoginPage = () => {
+  const error = useSelector(getAuthError);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -33,6 +44,9 @@ export const LoginPage = () => {
   const handleSubmit = e => {
     e.preventDefault();
     dispatch(logIn({ name, email, password }));
+    if (error) {
+      return;
+    }
     setName('');
     setEmail('');
     setPassword('');
@@ -44,36 +58,40 @@ export const LoginPage = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nameInputId">Name</label>
-        <input
-          type="text"
-          name="inputName"
-          value={name}
-          onChange={handleChange}
-          id={nameInputId}
-        />
+      <LogWrapper>
+        <LogTitle>Login, please</LogTitle>
+        {error && <ErrorText>Something went wrong, try again!</ErrorText>}
+        <LoginForm onSubmit={handleSubmit}>
+          <FormLabel htmlFor="nameInputId">Name</FormLabel>
+          <FormInput
+            type="text"
+            name="inputName"
+            value={name}
+            onChange={handleChange}
+            id={nameInputId}
+          />
 
-        <label htmlFor="emailInputId">Email</label>
-        <input
-          type="email"
-          name="inputEmail"
-          value={email}
-          onChange={handleChange}
-          id={emailInputId}
-        />
+          <FormLabel htmlFor="emailInputId">Email</FormLabel>
+          <FormInput
+            type="email"
+            name="inputEmail"
+            value={email}
+            onChange={handleChange}
+            id={emailInputId}
+          />
 
-        <label htmlFor="passwordInputId">Password</label>
-        <input
-          type="password"
-          name="inputPassword"
-          value={password}
-          onChange={handleChange}
-          id={passwordInputId}
-        />
+          <FormLabel htmlFor="passwordInputId">Password</FormLabel>
+          <FormInput
+            type="password"
+            name="inputPassword"
+            value={password}
+            onChange={handleChange}
+            id={passwordInputId}
+          />
 
-        <button type="submit">Sign up</button>
-      </form>
+          <SubmitBtn type="submit">Sign in</SubmitBtn>
+        </LoginForm>
+      </LogWrapper>
     </>
   );
 };

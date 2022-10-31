@@ -6,6 +6,7 @@ const initialState = {
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -22,6 +23,14 @@ const authSlice = createSlice({
         },
         token: payload.token,
         isLoggedIn: true,
+        error: null,
+      };
+    },
+
+    [register.rejected]: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload.name,
       };
     },
 
@@ -35,6 +44,14 @@ const authSlice = createSlice({
         },
         token: payload.token,
         isLoggedIn: true,
+        error: null,
+      };
+    },
+
+    [logIn.rejected]: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload.name,
       };
     },
 
@@ -48,6 +65,14 @@ const authSlice = createSlice({
         },
         token: null,
         isLoggedIn: false,
+        error: null,
+      };
+    },
+
+    [logOut.rejected]: (state, { payload }) => {
+      return {
+        ...state,
+        error: payload.name,
       };
     },
 

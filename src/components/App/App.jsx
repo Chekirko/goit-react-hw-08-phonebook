@@ -5,6 +5,8 @@ import { refreshUser } from 'redux/operations';
 import { Layout } from 'components/Layout/Layout';
 import { Header } from 'components/Header/Header';
 import { Wrapper } from './App.styled';
+import { ThemeProvider } from '@mui/material';
+import { theme } from 'shared/theme';
 
 const App = function () {
   const dispatch = useDispatch();
@@ -16,12 +18,12 @@ const App = function () {
 
   return (
     !isRefreshing && (
-      <>
+      <ThemeProvider theme={theme}>
         <Header />
         <Wrapper>
           <Layout />
         </Wrapper>
-      </>
+      </ThemeProvider>
     )
   );
 };

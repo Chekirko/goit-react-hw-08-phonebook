@@ -1,9 +1,20 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
 import { register } from 'redux/operations';
+import {
+  RegWrapper,
+  ErrorText,
+  RegTitle,
+  RegisterForm,
+  FormInput,
+  FormLabel,
+  SubmitBtn,
+} from './RegisterPage.styled';
+import { getAuthError } from 'redux/selectors';
 
 export const RegisterPage = () => {
+  const error = useSelector(getAuthError);
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -43,10 +54,12 @@ export const RegisterPage = () => {
   const passwordInputId = nanoid();
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="nameInputId">Name</label>
-        <input
+    <RegWrapper>
+      <RegTitle>Have no account? Sign up!</RegTitle>
+      {error && <ErrorText>Something went wrong, try again!</ErrorText>}
+      <RegisterForm onSubmit={handleSubmit}>
+        <FormLabel htmlFor="nameInputId">Name</FormLabel>
+        <FormInput
           type="text"
           name="inputName"
           value={name}
@@ -54,8 +67,8 @@ export const RegisterPage = () => {
           id={nameInputId}
         />
 
-        <label htmlFor="emailInputId">Email</label>
-        <input
+        <FormLabel htmlFor="emailInputId">Email</FormLabel>
+        <FormInput
           type="email"
           name="inputEmail"
           value={email}
@@ -63,8 +76,8 @@ export const RegisterPage = () => {
           id={emailInputId}
         />
 
-        <label htmlFor="passwordInputId">Password</label>
-        <input
+        <FormLabel htmlFor="passwordInputId">Password</FormLabel>
+        <FormInput
           type="password"
           name="inputPassword"
           value={password}
@@ -72,8 +85,8 @@ export const RegisterPage = () => {
           id={passwordInputId}
         />
 
-        <button type="submit">Sign up</button>
-      </form>
-    </>
+        <SubmitBtn type="submit">Sign up</SubmitBtn>
+      </RegisterForm>
+    </RegWrapper>
   );
 };

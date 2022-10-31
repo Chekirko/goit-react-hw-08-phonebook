@@ -6,9 +6,14 @@ export const Contact = styled.li`
   &:not(:last-child) {
     margin-bottom: 10px;
   }
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 30%;
 `;
 
 export const DeleteBtn = styled.button`
   display: block;
   cursor: pointer;
+  background-color: #ff7a05;
 `;

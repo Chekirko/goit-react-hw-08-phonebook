@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getContacts, getFilter, getIsLoggedIn } from 'redux/selectors';
 import ContactItem from 'components/ContactItem/ContactItem';
 import { fetchContacts } from 'redux/operations';
-import { Contacts } from './ContactList.styled';
+import { Contacts, ContactsListMessage } from './ContactList.styled';
 
 const ContactList = () => {
   const contacts = useSelector(getContacts);
@@ -29,6 +29,9 @@ const ContactList = () => {
             return <ContactItem key={id} id={id} name={name} number={number} />;
           })}
         </Contacts>
+      )}
+      {contacts.items.length === 0 && (
+        <ContactsListMessage>There`s no contacts yet</ContactsListMessage>
       )}
     </>
   );

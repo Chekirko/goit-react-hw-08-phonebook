@@ -41,6 +41,7 @@ const ContactForm = function () {
 
   const nameInputId = nanoid();
   const numberInputId = nanoid();
+
   return (
     <Form action="" onSubmit={handleSubmit}>
       <FormLabel htmlFor="nameInputId">Name</FormLabel>
